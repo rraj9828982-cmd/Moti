@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>click moti</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #ffe0ec, #c6f0f7);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card-container {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      cursor: pointer;
+    }
+
+    .envelope {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      border: 2px solid #aaa;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.6s ease;
+      overflow: hidden;
+    }
+
+    .envelope.opened {
+      transform: rotateX(180deg);
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #ff8ba7;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transition: transform 0.6s ease;
+      transform-origin: top;
+    }
+
+    .envelope.opened .flap {
+      transform: rotateX(180deg);
+    }
+
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateY(100px);
+      background: #fff0f6;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      font-size: 1.2em;
+    }
+
+    .envelope.opened + .message {
+      transform: translate(-50%, -50%) translateY(0);
+      opacity: 1;
+    }
+
+    .note {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card-container" onclick="openCard()">
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+  </div>
+  <div class="message" id="message">
+YOU ARE ALWAYS BE MY FAV BEST FRIEND 
+  </div>
+</div>
+<audio id="sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_44a44c8c6b.mp3?filename=message-pop-110904.mp3"></audio>
+
+<script>
+  function openCard() {
+    const envelope = document.getElementById('envelope');
+    const message = document.getElementById('message');
+    const sound = document.getElementById('sound');
+
+    if (!envelope.classList.contains('opened')) {
+      envelope.classList.add('opened');
+      sound.play();
+    }
+  }
+</script>
+
+</body>
+</html>
